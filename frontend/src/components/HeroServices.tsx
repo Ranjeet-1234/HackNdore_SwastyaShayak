@@ -8,7 +8,7 @@ const FindServices: React.FC = () => {
     { icon: <FaClinicMedical />, name: 'Birth Certificate', link: '/birth' },
     { icon: <FaSchool />, name: 'Death Certificate', link: '/death' },
     { icon: <FaBuilding />, name: 'Download Documents', link:'/uploadocs' },
-    { icon: <FaBus />, name: 'Building Permit' },
+    { icon: <FaBus />, name: 'Building Permit', link: '/permits' },
   ];
 
   return (
