@@ -16,7 +16,7 @@ const TopNav: React.FC = () => {
     };
 
     return (
-        <div className="w-full h-9 border-b border-gray-200 bg-[#f7f7f7] text-sm flex items-center justify-evenly px-5">
+        <div className="w-full h-9 border-b border-gray-200 bg-[#f7f7f7] text-sm flex items-center justify-between px-5">
             <div className="flex items-center gap-5">
             </div>
             <div className="flex items-center gap-3">
