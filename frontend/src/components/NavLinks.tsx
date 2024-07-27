@@ -59,10 +59,10 @@ const NavLinks: React.FC = () => {
           Online Services <FaChevronDown className="ml-1" />
         </a>
         {showOnlineServices && (
-          <div className="absolute top-full left-0 bg-white shadow-lg mt-2 p-2 z-10 w-48">
+          <div className="absolute top-full left-0 bg-white shadow-lg mt-2 p-2 z-10 w-60">
             <Link to='/birth' className="block px-4 py-2 hover:bg-gray-200">Birth Certificate</Link>
             <Link to="/death" className="block px-4 py-2 hover:bg-gray-200">Death Certificate</Link>
-            <Link to="#service3" className="block px-4 py-2 hover:bg-gray-200">Water Tax</Link>
+            <Link to="/uploadocs" className="block px-4 py-2 hover:bg-gray-200">Download Documents</Link>
             <Link to='/permits'><a className="block px-4 py-2 hover:bg-gray-200">Building Permission</a></Link>
           </div>
         )}

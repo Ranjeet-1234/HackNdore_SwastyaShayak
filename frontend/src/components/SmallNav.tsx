@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const TopNav: React.FC = () => {
     const handleFontSizeChange = (action: 'increase' | 'decrease' | 'neutral'): void => {
@@ -30,8 +31,8 @@ const TopNav: React.FC = () => {
                 <button onClick={() => handleFontSizeChange('decrease')} className="text-gray-600:underline">A-</button>
                 <button onClick={() => handleFontSizeChange('neutral')} className="text-gray-600:underline">A</button>
                 <button onClick={() => handleFontSizeChange('increase')} className="text-gray-600:underline">A+</button>
-                <button className="hover:underline">Sign In</button>
-                <button className="hover:underline">Register</button>
+                <Link to="/login"><button className="hover:underline">Sign In</button></Link>
+                <Link to="/register"><button className="hover:underline">Register</button></Link>
             </div>
         </div>
     );

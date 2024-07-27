@@ -21,7 +21,7 @@ type FormData = yup.InferType<typeof schema>;
 
 const DeathCertificateForm: React.FC = () => {
   const [page, setPage] = useState(1);
-  
+
   const {
     control,
     handleSubmit,
@@ -37,19 +37,14 @@ const DeathCertificateForm: React.FC = () => {
     console.log(data);
   };
 
-  // Handle file change event
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files ? event.target.files[0] : null;
-    setValue('documents', file);
-  };
-
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Application for Death Certificate</h1>
+    <div className="max-w-7xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-4 border-b-2 border-black pb-2">Application for Death Certificate</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {page === 1 && (
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Deceased Information</h2>
+
+        <div>
+          <h2 className="text-xl font-semibold mb-4 border-b-2 border-black pb-2">Deceased Information</h2>
+          <div className='flex justify-between'>
             <Controller
               name="deceasedName"
               control={control}
@@ -106,10 +101,10 @@ const DeathCertificateForm: React.FC = () => {
               )}
             />
           </div>
-        )}
-        {page === 2 && (
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Informant Information</h2>
+        </div>
+        <div>
+          <h2 className="text-xl font-semibold mb-4 border-b-2 border-black pb-2">Informant Information</h2>
+          <div className='flex justify-between'>
             <Controller
               name="informantName"
               control={control}
@@ -155,49 +150,30 @@ const DeathCertificateForm: React.FC = () => {
               )}
             />
           </div>
-        )}
-        {page === 3 && (
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Upload Documents</h2>
-            <div className="mb-4">
+        </div>
+        <div>
+          <h2 className="text-xl font-semibold mb-4 border-b-2 border-black pb-2">Upload Documents</h2>
+          <div className="mb-4">
+            <div>
               <label className="block text-sm font-medium mb-1">Upload Supporting Documents</label>
               <input
                 type="file"
                 accept=".pdf,.jpg,.png"
                 {...register('documents')}
                 className="p-2 border rounded w-full"
-                onChange={handleFileChange}
               />
               {errors.documents && <p className="text-red-500 text-sm">{errors.documents.message}</p>}
+
             </div>
           </div>
-        )}
+        </div>
         <div className="mt-6 flex justify-between">
-          {page > 1 && (
-            <button
-              type="button"
-              onClick={() => setPage(page - 1)}
-              className="bg-gray-500 text-white px-4 py-2 rounded"
-            >
-              Previous
-            </button>
-          )}
-          {page < 3 ? (
-            <button
-              type="button"
-              onClick={() => setPage(page + 1)}
-              className="bg-blue-500 text-white px-4 py-2 rounded"
-            >
-              Next
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="bg-green-500 text-white px-4 py-2 rounded"
-            >
-              Submit
-            </button>
-          )}
+          <button
+            type="submit"
+            className="bg-green-500 text-white px-4 py-2 rounded"
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>

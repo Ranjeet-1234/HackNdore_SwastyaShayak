@@ -5,42 +5,32 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 // Validation schema using Yup
 const schema = yup.object().shape({
-  applicantName: yup.string().required('Applicant Name is required'),
-  contactNumber: yup.string().required('Contact Number is required').matches(/^[0-9]{10}$/, 'Must be a valid phone number'),
-  email: yup.string().email('Invalid email address').required('Email is required'),
-  propertyAddress: yup.string().required('Property Address is required'),
-  plotNumber: yup.string().required('Plot Number is required'),
-  projectType: yup.string().required('Project Type is required'),
-  estimatedCost: yup.number().required('Estimated Cost is required').positive('Cost must be a positive number'),
-  caseType: yup.string().required('Case Type is required'),
-  consultantName: yup.string().required('Consultant Name is required'),
-  consultantContact: yup.string().required('Consultant Contact is required').matches(/^[0-9]{10}$/, 'Must be a valid phone number'),
-  ownerName: yup.string().required('Owner Name is required'),
-  ownerContact: yup.string().required('Owner Contact is required').matches(/^[0-9]{10}$/, 'Must be a valid phone number'),
-  ownerAddress: yup.string().required('Owner Address is required'),
-  layoutApprovalType: yup.string().required('Layout Approval Type is required'),
-  additionalFar: yup.boolean(),
-  plotMortgaged: yup.boolean(),
-  additionalParking: yup.boolean(),
-  waterSupplySanctioned: yup.boolean(),
-  drainageSanctioned: yup.boolean(),
-  roadType: yup.string().required('Road Type is required'),
-  ulbName: yup.string().required('ULB Name is required'),
-  zone: yup.string().required('Zone is required'),
-  ward: yup.string().required('Ward is required'),
-  colonyName: yup.string().required('Colony Name is required'),
-  plotNumberTable: yup.string().required('Plot Number is required'),
+  landUse: yup.string().required('Land Use is required'),
+  grossPlotArea: yup.number().required('Gross Plot Area is required').positive('Gross Plot Area must be positive'),
+  netPlotArea: yup.number().required('Net Plot Area is required').positive('Net Plot Area must be positive'),
+  roadWidth: yup.number().required('Road Width is required').positive('Road Width must be positive'),
+  buildingUse: yup.string().required('Building Use is required'),
+  typeOfDevelopment: yup.string().required('Type of Development is required'),
+  proposedGroundCoverage: yup.number().required('Proposed Ground Coverage is required').positive('Ground Coverage must be positive'),
+  buildingHeight: yup.number().required('Building Height is required').positive('Building Height must be positive'),
+  provisionForDivyand: yup.string().required('Provision for Divyand is required'),
+  additionalParkingType: yup.string().required('Additional Parking Type is required'),
+  designCompliance: yup.string().required('Design Compliance is required'),
+  electricLineDistanceCompliance: yup.string().required('Electric Line Distance Compliance is required'),
+  mandatoryDocuments: yup.mixed().required('Mandatory Documents are required').test('fileSize', 'File size is too large', (value) => value && value.size <= 10485760), // Limit file size to 10MB
+  cornerPlotFlag: yup.boolean().required('Corner Plot Flag is required'),
 });
 
 type FormData = yup.InferType<typeof schema>;
 
 const BuildingPermitForm: React.FC = () => {
   const [page, setPage] = useState(1);
-  
+
   const {
     control,
     handleSubmit,
     formState: { errors },
+    register,
   } = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
@@ -51,100 +41,183 @@ const BuildingPermitForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Building Permit Application</h1>
+    <div className="max-w-7xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-4 border-b-2 border-black pb-2">Building Permit Application</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         {page === 1 && (
           <div>
-            <h2 className="text-xl font-semibold mb-4">General Information</h2>
-            <Controller
-              name="applicantName"
-              control={control}
-              render={({ field }) => (
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-1">Applicant Name</label>
-                  <input type="text" {...field} className="p-2 border rounded w-full" />
-                  {errors.applicantName && <p className="text-red-500 text-sm">{errors.applicantName.message}</p>}
-                </div>
-              )}
-            />
-            <Controller
-              name="contactNumber"
-              control={control}
-              render={({ field }) => (
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-1">Contact Number</label>
-                  <input type="text" {...field} className="p-2 border rounded w-full" />
-                  {errors.contactNumber && <p className="text-red-500 text-sm">{errors.contactNumber.message}</p>}
-                </div>
-              )}
-            />
-            <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-1">Email Address</label>
-                  <input type="email" {...field} className="p-2 border rounded w-full" />
-                  {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
-                </div>
-              )}
-            />
-            <Controller
-              name="propertyAddress"
-              control={control}
-              render={({ field }) => (
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-1">Property Address</label>
-                  <input type="text" {...field} className="p-2 border rounded w-full" />
-                  {errors.propertyAddress && <p className="text-red-500 text-sm">{errors.propertyAddress.message}</p>}
-                </div>
-              )}
-            />
-            <Controller
-              name="plotNumber"
-              control={control}
-              render={({ field }) => (
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-1">Plot Number</label>
-                  <input type="text" {...field} className="p-2 border rounded w-full" />
-                  {errors.plotNumber && <p className="text-red-500 text-sm">{errors.plotNumber.message}</p>}
-                </div>
-              )}
-            />
-            {/* Add additional fields for project type, estimated cost, etc. */}
+            <h2 className="text-lg font-semibold mb-4 border-b-2 border-black pb-2">Building Information</h2>
+            <div className='flex flex-wrap'>
+              <Controller
+                name="landUse"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full md:w-1/2">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Land Use</label>
+                    <input type="text" {...field} className="p-2 border border-gray-400 rounded w-full" />
+                    {errors.landUse && <p className="text-red-500 text-sm">{errors.landUse.message}</p>}
+                  </div>
+                )}
+              />
+              <Controller
+                name="grossPlotArea"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full md:w-1/2">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Gross Plot Area (sq. meters)</label>
+                   
+                    <input type="number" {...field} className="p-2 border border-gray-400 rounded w-full" />
+                    {errors.grossPlotArea && <p className="text-red-500 text-sm">{errors.grossPlotArea.message}</p>}
+                  </div>
+                )}
+              />
+              <Controller
+                name="netPlotArea"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full md:w-1/2">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Net Plot Area (sq. meters)</label>
+                    <input type="number" {...field} className="p-2 border border-gray-400 rounded w-full" />
+                    {errors.netPlotArea && <p className="text-red-500 text-sm">{errors.netPlotArea.message}</p>}
+                  </div>
+                )}
+              />
+              <Controller
+                name="roadWidth"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full md:w-1/2">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Road Width (meters)</label>
+                    <input type="number" {...field} className="p-2 border border-gray-400 rounded w-full" />
+                    {errors.roadWidth && <p className="text-red-500 text-sm">{errors.roadWidth.message}</p>}
+                  </div>
+                )}
+              />
+              <Controller
+                name="buildingUse"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Building Use</label>
+                    <input type="text" {...field} className="p-2 border border-gray-400 rounded w-full" />
+                    {errors.buildingUse && <p className="text-red-500 text-sm">{errors.buildingUse.message}</p>}
+                  </div>
+                )}
+              />
+              <Controller
+                name="typeOfDevelopment"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Type of Development</label>
+                    <input type="text" {...field} className="p-2 border border-gray-400 rounded w-full" />
+                    {errors.typeOfDevelopment && <p className="text-red-500 text-sm">{errors.typeOfDevelopment.message}</p>}
+                  </div>
+                )}
+              />
+              <Controller
+                name="proposedGroundCoverage"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full md:w-1/2">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Proposed Ground Coverage (%)</label>
+                    <input type="number" {...field} className="p-2 border border-gray-400 rounded w-full" />
+                    {errors.proposedGroundCoverage && <p className="text-red-500 text-sm">{errors.proposedGroundCoverage.message}</p>}
+                  </div>
+                )}
+              />
+              <Controller
+                name="buildingHeight"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full md:w-1/2">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Building Height (meters)</label>
+                    <input type="number" {...field} className="p-2 border border-gray-400 rounded w-full" />
+                    {errors.buildingHeight && <p className="text-red-500 text-sm">{errors.buildingHeight.message}</p>}
+                  </div>
+                )}
+              />
+              <Controller
+                name="provisionForDivyand"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Provision for Divyand</label>
+                    <input type="text" {...field} className="p-2 border border-gray-400 rounded w-full" />
+                    {errors.provisionForDivyand && <p className="text-red-500 text-sm">{errors.provisionForDivyand.message}</p>}
+                  </div>
+                )}
+              />
+              <Controller
+                name="additionalParkingType"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Additional Parking Type</label>
+                    <input type="text" {...field} className="p-2 border border-gray-400 rounded w-full" />
+                    {errors.additionalParkingType && <p className="text-red-500 text-sm">{errors.additionalParkingType.message}</p>}
+                  </div>
+                )}
+              />
+              <Controller
+                name="designCompliance"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Design Compliance</label>
+                    <input type="text" {...field} className="p-2 border border-gray-400 rounded w-full" />
+                    {errors.designCompliance && <p className="text-red-500 text-sm">{errors.designCompliance.message}</p>}
+                  </div>
+                )}
+              />
+              <Controller
+                name="electricLineDistanceCompliance"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Electric Line Distance Compliance</label>
+                    <input type="text" {...field} className="p-2 border border-gray-400 rounded w-full" />
+                    {errors.electricLineDistanceCompliance && <p className="text-red-500 text-sm">{errors.electricLineDistanceCompliance.message}</p>}
+                  </div>
+                )}
+              />
+              <Controller
+                name="cornerPlotFlag"
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4 w-full">
+                    <label className="block text-sm font-medium mb-1 text-gray-700">Corner Plot Flag</label>
+                    <input type="checkbox" {...field} className="p-2 border border-gray-400 rounded" />
+                    {errors.cornerPlotFlag && <p className="text-red-500 text-sm">{errors.cornerPlotFlag.message}</p>}
+                  </div>
+                )}
+              />
+            </div>
           </div>
         )}
-        {page === 2 && (
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Project Details</h2>
+
+        <div>
+          <h2 className="text-lg font-semibold mb-4 border-b-2 border-black pb-2">Upload Mandatory Documents</h2>
+          <div className='flex flex-wrap'>
             <Controller
-              name="projectType"
+              name="mandatoryDocuments"
               control={control}
               render={({ field }) => (
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-1">Project Type</label>
-                  <input type="text" {...field} className="p-2 border rounded w-full" />
-                  {errors.projectType && <p className="text-red-500 text-sm">{errors.projectType.message}</p>}
+                <div className="mb-4 w-full">
+                  <label className="block text-sm font-medium mb-1 text-gray-700">Upload Mandatory Documents (PDF, JPG, PNG)</label>
+                  <input
+                    type="file"
+                    accept=".pdf,.jpg,.png"
+                    {...field}
+                    className="p-2 border border-gray-400 rounded w-full"
+                  />
+                  {errors.mandatoryDocuments && <p className="text-red-500 text-sm">{errors.mandatoryDocuments.message}</p>}
                 </div>
               )}
             />
-            <Controller
-              name="estimatedCost"
-              control={control}
-              render={({ field }) => (
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-1">Estimated Cost (INR)</label>
-                  <input type="number" {...field} className="p-2 border rounded w-full" />
-                  {errors.estimatedCost && <p className="text-red-500 text-sm">{errors.estimatedCost.message}</p>}
-                </div>
-              )}
-            />
-            {/* Add additional fields for case type, consultant info, etc. */}
           </div>
-        )}
-        {/* Add additional pages as needed */}
-        
+        </div>
+
         <div className="mt-6 flex justify-between">
           {page > 1 && (
             <button
@@ -155,22 +228,13 @@ const BuildingPermitForm: React.FC = () => {
               Previous
             </button>
           )}
-          {page < 2 ? (
-            <button
-              type="button"
-              onClick={() => setPage(page + 1)}
-              className="bg-blue-500 text-white px-4 py-2 rounded"
-            >
-              Next
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="bg-green-500 text-white px-4 py-2 rounded"
-            >
-              Submit
-            </button>
-          )}
+
+          <button
+            type="submit"
+            className="bg-green-500 text-white px-4 py-2 rounded"
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>
