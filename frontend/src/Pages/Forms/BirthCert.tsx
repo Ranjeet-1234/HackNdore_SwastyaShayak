@@ -16,7 +16,7 @@ const BirthCertificateForm = () => {
     documents: null,
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any; files: any; }; }) => {
     const { name, value, files } = e.target;
     setFormData({
       ...formData,
@@ -24,7 +24,7 @@ const BirthCertificateForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     console.log(formData);
   };
