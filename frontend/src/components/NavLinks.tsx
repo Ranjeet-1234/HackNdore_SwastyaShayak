@@ -1,6 +1,7 @@
 // src/components/NavLinks.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const NavLinks: React.FC = () => {
   const [showDepartments, setShowDepartments] = useState(false);
@@ -32,8 +33,7 @@ const NavLinks: React.FC = () => {
 
   return (
     <nav className="border-b border-t border-gray-300 p-2 flex justify-evenly text-black font-semibold uppercase mt-5 relative">
-      <a href="#home" className="hover:text-gray-400">Home</a>
-
+      <Link to='/'><a className="hover:text-gray-400">Home</a></Link>
       <div className="relative" ref={departmentsRef}>
         <a
           href="#departments"
@@ -53,17 +53,17 @@ const NavLinks: React.FC = () => {
 
       <div className="relative" ref={onlineServicesRef}>
         <a
-          href="#online-services"
           className="hover:text-gray-400 flex items-center cursor-pointer"
           onClick={() => setShowOnlineServices(!showOnlineServices)}
         >
           Online Services <FaChevronDown className="ml-1" />
         </a>
         {showOnlineServices && (
-          <div className="absolute top-full left-0 bg-white shadow-lg mt-2 p-2 z-10 w-48">
-            <a href="#service1" className="block px-4 py-2 hover:bg-gray-200">Service 1</a>
-            <a href="#service2" className="block px-4 py-2 hover:bg-gray-200">Service 2</a>
-            <a href="#service3" className="block px-4 py-2 hover:bg-gray-200">Service 3</a>
+          <div className="absolute top-full left-0 bg-white shadow-lg mt-2 p-2 z-10 w-60">
+            <Link to='/birth' className="block px-4 py-2 hover:bg-gray-200">Birth Certificate</Link>
+            <Link to="/death" className="block px-4 py-2 hover:bg-gray-200">Death Certificate</Link>
+            <Link to="/uploadocs" className="block px-4 py-2 hover:bg-gray-200">Download Documents</Link>
+            <Link to='/permits'><a className="block px-4 py-2 hover:bg-gray-200">Building Permission</a></Link>
           </div>
         )}
       </div>
