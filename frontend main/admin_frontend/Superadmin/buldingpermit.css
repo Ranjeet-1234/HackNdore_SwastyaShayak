@@ -1,0 +1,88 @@
+.building-table {
+  border: 3px solid rgb(60, 0, 0);
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.building-table table {
+  width: 100%;
+  margin-left: 1px;
+  border-collapse: collapse;
+  margin-top: 10px;
+  text-align: center;
+}
+.building-table table thead td {
+  font-weight: 600;
+}
+.building-table table tr {
+  color: black;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+}
+.building-table table tr:last-child {
+  border-bottom: none;
+}
+
+.building-table td {
+  font-size: 24px;
+  padding: 25px;
+  box-shadow: 1px 3px 3px 1px rgb(54, 54, 54);
+}
+
+.building-table th {
+  background-color: rgb(158, 158, 230);
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px rgb(31, 30, 30);
+}
+.building-table table tbody tr:hover {
+  background-color: rgb(218, 174, 255);
+  color: black;
+}
+.building-table table tr td {
+  padding: 5px;
+  background-color: rgb(255, 246, 246);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgb(161, 161, 161);
+}
+.building-table table tr td:last-child {
+  text-align: center;
+}
+.building-table table tr td:nth-child(2) {
+  text-align: center;
+}
+.building-table table tr td:nth-child(3) {
+  text-align: center;
+}
+tr :hover {
+  background-color: rgb(224, 255, 250);
+  color: black;
+  cursor: pointer;
+}
+
+.father-building {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.building-table button {
+  padding: 10px;
+  font-size: 23px;
+  background-color: rgb(116, 58, 0);
+  border-radius: 20px;
+  width: 130px;
+  border: none;
+  color: white;
+}
+
+.description {
+  padding: 10px;
+  height: 200px;
+  width: 1100px;
+  border: 1px solid black;
+}

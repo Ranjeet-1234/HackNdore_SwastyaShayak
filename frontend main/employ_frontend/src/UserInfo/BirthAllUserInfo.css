@@ -1,0 +1,87 @@
+.upperTable table {
+  width: 85%;
+  margin-left: 100px;
+  border-collapse: collapse;
+  margin-top: 10px;
+  text-align: center;
+}
+.upperTable table thead td {
+  font-weight: 600;
+}
+.upperTable table tr {
+  color: black;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+}
+.upperTable table tr:last-child {
+  border-bottom: none;
+}
+
+.upperTable td {
+  font-size: 20px;
+  padding: 5px;
+  box-shadow: 1px 3px 3px 1px rgb(54, 54, 54);
+}
+
+.hosp-one {
+  background-color: rgb(248, 202, 202);
+}
+
+.hosp-two {
+  background-color: rgb(235, 235, 255);
+}
+
+.hosp-three {
+  background-color: rgb(209, 254, 209);
+}
+
+.upperTable th {
+  background-color: rgb(49, 49, 86);
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgb(31, 30, 30);
+}
+.upperTable table tbody tr:hover {
+  background-color: rgb(218, 174, 255);
+  color: black;
+}
+.upperTable table tr td {
+  padding: 5px;
+  box-shadow: 5px 5px 5px rgb(161, 161, 161);
+}
+.upperTable table tr td:last-child {
+  text-align: center;
+}
+.upperTable table tr td:nth-child(2) {
+  text-align: center;
+}
+.upperTable table tr td:nth-child(3) {
+  text-align: center;
+}
+tr :hover {
+  background-color: rgb(175, 255, 242);
+  cursor: pointer;
+}
+
+.bottomTable table {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.bottomTable td {
+  padding: 20px;
+  font-size: 20px;
+}
+
+.bottomTable button {
+  background-color: red;
+  padding: 8px;
+  color: white;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.statusName {
+  background-color: yellow;
+}

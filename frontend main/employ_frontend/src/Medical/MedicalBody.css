@@ -1,0 +1,33 @@
+.allPics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.oneHos {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.hosVistBtn {
+  background-color: rgb(35, 6, 121);
+  padding: 10px;
+  color: white;
+  width: 350px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+.hospitalOne img {
+  margin-bottom: 10px;
+  box-shadow: 6px 6px 20px black;
+}
+
+.hosVistBtn:hover {
+  background-color: rgb(255, 77, 0);
+  color: rgb(255, 255, 255);
+}
