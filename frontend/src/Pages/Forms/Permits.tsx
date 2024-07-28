@@ -242,7 +242,6 @@ const BuildingPermitForm: React.FC = () => {
                 onChange={handleChange}
                 className="p-2 border border-gray-400 rounded w-full"
               />
-              {errors.mandatoryDocuments && <p className="text-red-500 text-sm">{errors.mandatoryDocuments}</p>}
             </div>
           </div>
         </div>
