@@ -37,6 +37,8 @@ const BuildingPermitForm: React.FC = () => {
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [page, setPage] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const validate = (): boolean => {
     const newErrors: { [key: string]: string } = {};
@@ -71,18 +73,25 @@ const BuildingPermitForm: React.FC = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      console.log(formData);
+      setIsSubmitting(true);
+      setTimeout(() => {
+        console.log(formData);
+        setIsSubmitting(false);
+        setSubmitMessage('Form submitted successfully!');
+      }, 2000); // Simulate an API call
     }
   };
 
   return (
     <div className="max-w-7xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4 border-b-2 border-black pb-2">Building Permit Application</h1>
+      {submitMessage && <p className="text-green-500 text-lg mb-4">{submitMessage}</p>}
       <form onSubmit={handleSubmit}>
         {page === 1 && (
           <div>
             <h2 className="text-lg font-semibold mb-4 border-b-2 border-black pb-2">Building Information</h2>
             <div className="flex flex-wrap">
+              {/* Land Use Input */}
               <div className="mb-4 w-full md:w-1/2">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Land Use</label>
                 <input
@@ -94,6 +103,7 @@ const BuildingPermitForm: React.FC = () => {
                 />
                 {errors.landUse && <p className="text-red-500 text-sm">{errors.landUse}</p>}
               </div>
+              {/* Gross Plot Area Input */}
               <div className="mb-4 w-full md:w-1/2">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Gross Plot Area (sq. meters)</label>
                 <input
@@ -105,6 +115,7 @@ const BuildingPermitForm: React.FC = () => {
                 />
                 {errors.grossPlotArea && <p className="text-red-500 text-sm">{errors.grossPlotArea}</p>}
               </div>
+              {/* Net Plot Area Input */}
               <div className="mb-4 w-full md:w-1/2">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Net Plot Area (sq. meters)</label>
                 <input
@@ -116,6 +127,7 @@ const BuildingPermitForm: React.FC = () => {
                 />
                 {errors.netPlotArea && <p className="text-red-500 text-sm">{errors.netPlotArea}</p>}
               </div>
+              {/* Road Width Input */}
               <div className="mb-4 w-full md:w-1/2">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Road Width (meters)</label>
                 <input
@@ -127,6 +139,7 @@ const BuildingPermitForm: React.FC = () => {
                 />
                 {errors.roadWidth && <p className="text-red-500 text-sm">{errors.roadWidth}</p>}
               </div>
+              {/* Building Use Input */}
               <div className="mb-4 w-full">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Building Use</label>
                 <input
@@ -138,6 +151,7 @@ const BuildingPermitForm: React.FC = () => {
                 />
                 {errors.buildingUse && <p className="text-red-500 text-sm">{errors.buildingUse}</p>}
               </div>
+              {/* Type of Development Input */}
               <div className="mb-4 w-full">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Type of Development</label>
                 <input
@@ -149,6 +163,7 @@ const BuildingPermitForm: React.FC = () => {
                 />
                 {errors.typeOfDevelopment && <p className="text-red-500 text-sm">{errors.typeOfDevelopment}</p>}
               </div>
+              {/* Proposed Ground Coverage Input */}
               <div className="mb-4 w-full md:w-1/2">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Proposed Ground Coverage (%)</label>
                 <input
@@ -160,6 +175,7 @@ const BuildingPermitForm: React.FC = () => {
                 />
                 {errors.proposedGroundCoverage && <p className="text-red-500 text-sm">{errors.proposedGroundCoverage}</p>}
               </div>
+              {/* Building Height Input */}
               <div className="mb-4 w-full md:w-1/2">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Building Height (meters)</label>
                 <input
@@ -171,6 +187,7 @@ const BuildingPermitForm: React.FC = () => {
                 />
                 {errors.buildingHeight && <p className="text-red-500 text-sm">{errors.buildingHeight}</p>}
               </div>
+              {/* Provision for Divyand Input */}
               <div className="mb-4 w-full">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Provision for Divyand</label>
                 <input
@@ -182,6 +199,7 @@ const BuildingPermitForm: React.FC = () => {
                 />
                 {errors.provisionForDivyand && <p className="text-red-500 text-sm">{errors.provisionForDivyand}</p>}
               </div>
+              {/* Additional Parking Type Input */}
               <div className="mb-4 w-full">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Additional Parking Type</label>
                 <input
@@ -193,6 +211,7 @@ const BuildingPermitForm: React.FC = () => {
                 />
                 {errors.additionalParkingType && <p className="text-red-500 text-sm">{errors.additionalParkingType}</p>}
               </div>
+              {/* Design Compliance Input */}
               <div className="mb-4 w-full">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Design Compliance</label>
                 <input
@@ -204,6 +223,7 @@ const BuildingPermitForm: React.FC = () => {
                 />
                 {errors.designCompliance && <p className="text-red-500 text-sm">{errors.designCompliance}</p>}
               </div>
+              {/* Electric Line Distance Compliance Input */}
               <div className="mb-4 w-full">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Electric Line Distance Compliance</label>
                 <input
@@ -215,6 +235,7 @@ const BuildingPermitForm: React.FC = () => {
                 />
                 {errors.electricLineDistanceCompliance && <p className="text-red-500 text-sm">{errors.electricLineDistanceCompliance}</p>}
               </div>
+              {/* Corner Plot Flag Input */}
               <div className="mb-4 w-full">
                 <label className="block text-sm font-medium mb-1 text-gray-700">Corner Plot Flag</label>
                 <input
@@ -230,21 +251,25 @@ const BuildingPermitForm: React.FC = () => {
           </div>
         )}
 
-        <div>
-          <h2 className="text-lg font-semibold mb-4 border-b-2 border-black pb-2">Upload Mandatory Documents</h2>
-          <div className="flex flex-wrap">
-            <div className="mb-4 w-full">
-              <label className="block text-sm font-medium mb-1 text-gray-700">Upload Mandatory Documents (PDF, JPG, PNG)</label>
-              <input
-                type="file"
-                name="mandatoryDocuments"
-                accept=".pdf,.jpg,.png"
-                onChange={handleChange}
-                className="p-2 border border-gray-400 rounded w-full"
-              />
+        {page === 2 && (
+          <div>
+            <h2 className="text-lg font-semibold mb-4 border-b-2 border-black pb-2">Upload Mandatory Documents</h2>
+            <div className="flex flex-wrap">
+              {/* Mandatory Documents Upload */}
+              <div className="mb-4 w-full">
+                <label className="block text-sm font-medium mb-1 text-gray-700">Upload Mandatory Documents (PDF, JPG, PNG)</label>
+                <input
+                  type="file"
+                  name="mandatoryDocuments"
+                  accept=".pdf,.jpg,.png"
+                  onChange={handleChange}
+                  className="p-2 border border-gray-400 rounded w-full"
+                />
+                {errors.mandatoryDocuments && <p className="text-red-500 text-sm">{errors.mandatoryDocuments}</p>}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className="mt-6 flex justify-between">
           {page > 1 && (
@@ -256,13 +281,24 @@ const BuildingPermitForm: React.FC = () => {
               Previous
             </button>
           )}
-
-          <button
-            type="submit"
-            className="bg-green-500 text-white px-4 py-2 rounded"
-          >
-            Submit
-          </button>
+          {page < 2 && (
+            <button
+              type="button"
+              onClick={() => setPage(page + 1)}
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Next
+            </button>
+          )}
+          {page === 2 && (
+            <button
+              type="submit"
+              className="bg-green-500 text-white px-4 py-2 rounded"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Submitting...' : 'Submit'}
+            </button>
+          )}
         </div>
       </form>
     </div>
